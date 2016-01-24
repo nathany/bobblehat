@@ -6,19 +6,25 @@ A Go library for Raspberry Pi HATs (Hardware Attached on Top), starting with the
 
 ### Screen
 
+<img src="https://cdn.rawgit.com/gophergala2016/bobblehat/master/gopher/screen.svg" width="200">
+
 sense/screen package
 
 #### Stick
 
-Not yet implemented
+<img src="https://cdn.rawgit.com/gophergala2016/bobblehat/master/gopher/stick.svg" width="200">
 
 ### Motion
+
+<img src="https://cdn.rawgit.com/gophergala2016/bobblehat/master/gopher/motion.svg" width="200">
 
 Gyroscope, Accelerometer, Magnetometer.
 
 Not yet implemented.
 
 ### Weather
+
+<img src="https://cdn.rawgit.com/gophergala2016/bobblehat/master/gopher/weather.svg" width="200">
 
 Temperature, Humidity, Barometric pressure
 
