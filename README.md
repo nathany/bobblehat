@@ -37,9 +37,9 @@ Not yet implemented
 #### Team
 
 * [Carlisia Campos](https://github.com/carlisia), Developer, California, U.S.
-* [Ravi Sastryk](https://github.com/ravisastryk), Developer, California, U.S.
 * [Nathan Youngman](https://github.com/nathany), Developer, Alberta, Canada
 * [Olga Shalakhina](https://github.com/osshalakhina), Illustrator, Ukraine
+* [Ravi Sastryk](https://github.com/ravisastryk), Developer, California, U.S.
 
 #### Media
 
