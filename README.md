@@ -4,16 +4,34 @@ A Go library for Raspberry Pi HATs (Hardware Attached on Top), starting with the
 
 [![GoDoc](https://godoc.org/github.com/gophergala2016/bobblehat?status.svg)](https://godoc.org/github.com/gophergala2016/bobblehat) [![Build Status](https://travis-ci.org/gophergala2016/bobblehat.svg?branch=master)](https://travis-ci.org/gophergala2016/bobblehat)
 
-### Status
+### Screen
 
-Screen: sense/screen package
-Stick: Not yet implemented
-Gyroscope: Not yet implemented
-Accelerometer: Not yet implemented
-Magnetometer: Not yet implemented
-Temperature: Not yet implemented
-Humidity: Not yet implemented
-Barometric pressure: Not yet implemented
+sense/screen package
+
+#### Stick
+
+Not yet implemented
+
+### Motion
+
+Gyroscope, Accelerometer, Magnetometer.
+
+Not yet implemented.
+
+### Weather
+
+Temperature, Humidity, Barometric pressure
+
+Not yet implemented
+
+### License
+
+The code is licensed under the Simplified BSD License.
+Copyright © 2016 bobbleHAT Authors.
+
+The original Go gopher © 2009 Renée French. Used under Creative Commons Attribution 3.0 license.
+
+Illustrations © 2016 Olga Shalakhina.
 
 ### Related Projects
 
