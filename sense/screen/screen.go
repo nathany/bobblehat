@@ -9,20 +9,31 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/gophergala2016/bobblehat/sense/screen/color"
+	"github.com/gophergala2016/bobblehat/sense/screen/texture"
 )
 
-// FrameBuffer for 8x8 LED Matrix (row, column)
-type FrameBuffer [8][8]color.Color
+// FrameBuffer is an 8x8 texture that can draw to the LED Matrix.
+type FrameBuffer struct {
+	*texture.Texture
+}
+
+// NewFrameBuffer creates a back buffer for the screen.
+func NewFrameBuffer() *FrameBuffer {
+	return &FrameBuffer{
+		Texture: texture.New(8, 8),
+	}
+}
 
 // Draw a buffer to the LED matrix screen.
 func Draw(fb *FrameBuffer) error {
 	return draw(displayDevice, fb)
 }
 
+var blankFrameBuffer = NewFrameBuffer()
+
 // Clear the screen (off).
 func Clear() error {
-	return draw(displayDevice, new(FrameBuffer))
+	return draw(displayDevice, blankFrameBuffer)
 }
 
 // the LED matrix screen
@@ -43,7 +54,7 @@ func draw(backBuffer string, fb *FrameBuffer) error {
 	}
 	defer f.Close()
 
-	return binary.Write(f, binary.LittleEndian, fb)
+	return binary.Write(f, binary.LittleEndian, fb.Texture.Pixels)
 }
 
 // getDevice finds the named frame buffer.

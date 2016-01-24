@@ -1,39 +1,56 @@
 package main
 
 import (
-	"image"
 	_ "image/png"
+	"time"
 
 	"github.com/gophergala2016/bobblehat/sense/screen"
-	"github.com/gophergala2016/bobblehat/sense/screen/color"
+	"github.com/gophergala2016/bobblehat/sense/screen/texture"
 
 	"log"
-	"os"
 )
 
 func main() {
-	f, err := os.Open("gopher8x8.png")
-	fatalIfError(err)
-	defer f.Close()
+	fb := screen.NewFrameBuffer()
 
-	image, format, err := image.Decode(f)
+	tx, err := texture.Load("gopher16x16.png")
 	fatalIfError(err)
 
-	b := image.Bounds().Size()
-	log.Println(format, b)
+	// display top corner of image and wait a bit
+	texture.Blit(fb.Texture, 0, 0, tx, 0, 0, 8, 8)
+	screen.Draw(fb)
+	time.Sleep(500 * time.Millisecond)
 
-	if b.X != 8 || b.Y != 8 {
-		log.Fatal("Image is the wrong size.")
-	}
-
-	var fb screen.FrameBuffer
-	for y := 0; y < 8; y++ {
-		for x := 0; x < 8; x++ {
-			r, g, b, _ := image.At(x, y).RGBA()
-			fb[y][x] = color.New(uint8(r>>8), uint8(g>>8), uint8(b>>8))
+	// pan around the image
+	state := 1
+	var xo, yo int
+	for {
+		texture.Blit(fb.Texture, 0, 0, tx, xo, yo, 8, 8)
+		screen.Draw(fb)
+		switch state {
+		case 1: // down
+			yo++
+			if yo == tx.Height()-8 {
+				state = 2
+			}
+		case 2: // right
+			xo++
+			if xo == tx.Width()-8 {
+				state = 3
+			}
+		case 3: // up
+			yo--
+			if yo == 0 {
+				state = 4
+			}
+		case 4: // left
+			xo--
+			if xo == 0 {
+				state = 1
+			}
 		}
+		time.Sleep(100 * time.Millisecond)
 	}
-	screen.Draw(&fb)
 }
 
 func fatalIfError(err error) {
