@@ -1,4 +1,4 @@
-// Package color defines a 16-bit RGB 565 color.
+// Package color defines a 16-bit RGB565 color.
 package color
 
 // Color of a pixel (16 bit RGB565)

@@ -1,3 +1,4 @@
+// Package texture loads and creates abitrary sized RGB565 images.
 package texture
 
 import (
