@@ -8,13 +8,32 @@ import (
 )
 
 func main() {
-	var frontBuffer screen.FrameBuffer
-	frontBuffer[0][0] = color.Red
-	frontBuffer[0][1] = color.Green
-	frontBuffer[0][2] = color.Blue
-	frontBuffer[0][3] = color.New(128, 0, 128)
-	screen.Draw(&frontBuffer)
+	var fb screen.FrameBuffer
+	fb[0][0] = color.Red
+	fb[0][1] = color.Green
+	fb[0][2] = color.Blue
+	fb[0][3] = color.New(255, 0, 255) // Magenta
+	fb[0][4] = color.New(255, 255, 0) // Yellow
+	fb[0][5] = color.New(0, 255, 255) // Cyan
+	fb[0][6] = color.White
 
-	time.Sleep(time.Second * 3)
+	// gradients
+	var c uint8
+	var x int
+	for i := 1; i <= 8; i++ {
+		x = i - 1
+		c = uint8(i*32 - 1)
+		fb[1][x] = color.New(c, c, c)
+		fb[2][x] = color.New(c, 0, 0)
+		fb[3][x] = color.New(0, c, 0)
+		fb[4][x] = color.New(0, 0, c)
+		fb[5][x] = color.New(c, 0, c)
+		fb[6][x] = color.New(c, c, 0)
+		fb[7][x] = color.New(0, c, c)
+	}
+
+	screen.Draw(&fb)
+
+	time.Sleep(time.Second * 5)
 	screen.Clear()
 }

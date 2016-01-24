@@ -15,6 +15,16 @@ import (
 // FrameBuffer for 8x8 LED Matrix (row, column)
 type FrameBuffer [8][8]color.Color
 
+// Draw a buffer to the LED matrix screen.
+func Draw(fb *FrameBuffer) error {
+	return draw(displayDevice, fb)
+}
+
+// Clear the screen (off).
+func Clear() error {
+	return draw(displayDevice, new(FrameBuffer))
+}
+
 // the LED matrix screen
 var displayDevice string
 
@@ -24,16 +34,6 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-}
-
-// Draw a buffer to the LED matrix screen.
-func Draw(fb *FrameBuffer) error {
-	return draw(displayDevice, fb)
-}
-
-// Clear the screen (off).
-func Clear() error {
-	return draw(displayDevice, new(FrameBuffer))
 }
 
 func draw(backBuffer string, fb *FrameBuffer) error {

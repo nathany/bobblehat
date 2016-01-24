@@ -14,8 +14,8 @@ var (
 
 // New color from RGB components (0-255).
 func New(red, green, blue uint8) Color {
-	r := uint16(red>>3) & 0x1F
-	g := uint16(green>>2) & 0x3F
-	b := uint16(blue>>3) & 0x1F
-	return Color((r << 11) + (g << 5) + b)
+	r := red >> 3
+	g := green >> 2
+	b := blue >> 3
+	return (Color(r) << 11) + (Color(g) << 5) + Color(b)
 }
