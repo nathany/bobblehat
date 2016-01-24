@@ -1,4 +1,4 @@
-# Bobble HAT
+![bobbleHAT](https://raw.githubusercontent.com/gophergala2016/bobblehat/master/gopher/bobblehat.svg)
 
 A Go library for Raspberry Pi HATs (Hardware Attached on Top), starting with the [Sense HAT](https://www.raspberrypi.org/products/sense-hat/).
 
