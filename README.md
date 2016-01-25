@@ -30,6 +30,7 @@ A frame buffer is an 8x8 texture that can be drawn to the screen, but you can al
 
 ```go
 tx := texture.New(16, 16)
+tx.SetPixel(8, 8, color.White)
 ```
 
 Or load a PNG file into a new texture.
@@ -38,7 +39,7 @@ Or load a PNG file into a new texture.
 tx, err := texture.Load("image.png")
 ```
 
-Then `blit` function will copy between textures with destination and source offsets (x, y) and dimensions (width, height). See the image scrolling example for one use, but this can always be used to draw multi-pixels sprites (opaque).
+The `blit` function will copy between textures with destination and source offsets (x, y) and dimensions (width, height). See the image scrolling example for one use, but this can always be used to draw multi-pixels sprites (opaque).
 
 ```go
 texture.Blit(fb.Texture, 0, 0, tx, 0, 0, 8, 8)
