@@ -49,6 +49,23 @@ texture.Blit(fb.Texture, 0, 0, tx, 0, 0, 8, 8)
 
 <img src="https://cdn.rawgit.com/gophergala2016/bobblehat/master/gopher/stick.svg" width="200">
 
+The Sense HAT has a tiny joystick control.
+
+```go
+switch stick.ReadEvent() {
+case stick.UP:
+	// go north
+case stick.DOWN:
+	// go south
+case stick.LEFT:
+	// go west
+case stick.RIGHT:
+	// go east
+case stick.ENTER:
+	// joystick pressed in
+}
+```
+
 #### Motion
 
 <img src="https://cdn.rawgit.com/gophergala2016/bobblehat/master/gopher/motion.svg" width="200">
