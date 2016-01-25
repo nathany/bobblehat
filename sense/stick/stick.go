@@ -4,92 +4,22 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"math/rand"
 	"os"
 	"path/filepath"
 	"strings"
-	"time"
-
-	"github.com/gophergala2016/bobblehat/sense/screen"
-	"github.com/gophergala2016/bobblehat/sense/screen/color"
 )
 
+// Joystick events
 var (
-	RIGHT = 0
-	LEFT  = 1
-	UP    = 2
-	DOWN  = 3
-	ENTER = 4
+	Right = 0
+	Left  = 1
+	Up    = 2
+	Down  = 3
+	Enter = 4
 )
-
-func Draw() {
-	fb := screen.NewFrameBuffer()
-
-	count := 0
-	for {
-		count = readEvent()
-		fmt.Printf("Count is-->%d", count)
-
-		rand.Seed(time.Now().UnixNano())
-		direction := rand.Intn(5)
-
-		switch direction {
-		case RIGHT:
-			fmt.Println("right")
-			for i := 0; i < 8; i++ {
-				for j := 4; j < 8; j++ {
-					fb.SetPixel(i, j, color.Red)
-				}
-			}
-			break
-		case LEFT:
-			fmt.Println("left")
-			for i := 0; i < 8; i++ {
-				for j := 0; j < 4; j++ {
-					fb.SetPixel(i, j, color.Black)
-				}
-			}
-			break
-		case UP:
-			fmt.Println("up")
-			for i := 0; i < 4; i++ {
-				for j := 0; j < 8; j++ {
-					fb.SetPixel(i, j, color.Blue)
-				}
-			}
-			break
-		case DOWN:
-			fmt.Println("down")
-			for i := 4; i < 8; i++ {
-				for j := 0; j < 8; j++ {
-					fb.SetPixel(i, j, color.Green)
-				}
-			}
-			break
-		case ENTER:
-			fmt.Println("reset")
-			for i := 0; i < 8; i++ {
-				for j := 0; j < 8; j++ {
-					fb.SetPixel(i, j, color.White)
-				}
-			}
-			break
-		default:
-			fmt.Println("waiting to be pressed")
-		}
-		time.Sleep(10)
-	}
-
-	screen.Draw(fb)
-}
-
-func Clear() {
-	screen.Clear()
-}
 
 // the joy stick
 var joyStickDevice string
-var stickEventDirection int
 
 func init() {
 	var err error
@@ -99,7 +29,8 @@ func init() {
 	}
 }
 
-func readEvent() int {
+// ReadEvent from the joystick.
+func ReadEvent() int {
 	file, err := os.Open(joyStickDevice)
 	if err != nil {
 		panic(err)
