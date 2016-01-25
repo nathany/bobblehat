@@ -97,6 +97,7 @@ bobbleHAT in action:
 
 * [First light](https://www.instagram.com/p/BA5LhnHBkx0/)
 * [Scrolling gopher favicon](https://www.instagram.com/p/BA7rzTmhk_p/)
+* Follow [bobblePi](https://twitter.com/bobblepi) on Twitter for more videos.
 
 Team:
 
