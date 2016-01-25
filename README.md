@@ -53,15 +53,15 @@ The Sense HAT has a tiny joystick control.
 
 ```go
 switch stick.ReadEvent() {
-case stick.UP:
+case stick.Up:
 	// go north
-case stick.DOWN:
+case stick.Down:
 	// go south
-case stick.LEFT:
+case stick.Left:
 	// go west
-case stick.RIGHT:
+case stick.Right:
 	// go east
-case stick.ENTER:
+case stick.Enter:
 	// joystick pressed in
 }
 ```
