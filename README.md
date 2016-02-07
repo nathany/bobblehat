@@ -1,14 +1,14 @@
-![bobbleHAT](https://cdn.rawgit.com/gophergala2016/bobblehat/master/gopher/bobblehat.svg)
+![bobbleHAT](https://cdn.rawgit.com/nathany/bobblehat/master/gopher/bobblehat.svg)
 
 A Go library for Raspberry Pi HATs (Hardware Attached on Top), starting with the [Sense HAT](https://www.raspberrypi.org/products/sense-hat/).
 
-[![GoDoc](https://godoc.org/github.com/gophergala2016/bobblehat?status.svg)](https://godoc.org/github.com/gophergala2016/bobblehat) [![Build Status](https://travis-ci.org/gophergala2016/bobblehat.svg?branch=master)](https://travis-ci.org/gophergala2016/bobblehat)
+[![GoDoc](https://godoc.org/github.com/nathany/bobblehat?status.svg)](https://godoc.org/github.com/nathany/bobblehat) [![Build Status](https://travis-ci.org/nathany/bobblehat.svg?branch=master)](https://travis-ci.org/nathany/bobblehat)
 
 ### Documentation
 
 #### Screen
 
-<img src="https://cdn.rawgit.com/gophergala2016/bobblehat/master/gopher/screen.svg" width="200">
+<img src="https://cdn.rawgit.com/nathany/bobblehat/master/gopher/screen.svg" width="200">
 
 The Sense HAT has an 8x8 LED matrix that could be used to display the status of a headless server, to write a mini-game, or countless other possibilities.
 
@@ -47,7 +47,7 @@ texture.Blit(fb.Texture, 0, 0, tx, 0, 0, 8, 8)
 
 #### Stick
 
-<img src="https://cdn.rawgit.com/gophergala2016/bobblehat/master/gopher/stick.svg" width="200">
+<img src="https://cdn.rawgit.com/nathany/bobblehat/master/gopher/stick.svg" width="200">
 
 The Sense HAT has a tiny joystick control.
 
@@ -68,7 +68,7 @@ case stick.Enter:
 
 #### Motion
 
-<img src="https://cdn.rawgit.com/gophergala2016/bobblehat/master/gopher/motion.svg" width="200">
+<img src="https://cdn.rawgit.com/nathany/bobblehat/master/gopher/motion.svg" width="200">
 
 Gyroscope, Accelerometer, Magnetometer.
 
@@ -76,7 +76,7 @@ Not yet implemented.
 
 ### Weather
 
-<img src="https://cdn.rawgit.com/gophergala2016/bobblehat/master/gopher/weather.svg" width="200">
+<img src="https://cdn.rawgit.com/nathany/bobblehat/master/gopher/weather.svg" width="200">
 
 Temperature, Humidity, Barometric pressure
 

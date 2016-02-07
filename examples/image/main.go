@@ -7,8 +7,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gophergala2016/bobblehat/sense/screen"
-	"github.com/gophergala2016/bobblehat/sense/screen/texture"
+	"github.com/nathany/bobblehat/sense/screen"
+	"github.com/nathany/bobblehat/sense/screen/texture"
 
 	"log"
 )

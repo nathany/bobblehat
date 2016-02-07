@@ -6,7 +6,7 @@ import (
 	_ "image/png" // to load PNG files
 	"os"
 
-	"github.com/gophergala2016/bobblehat/sense/screen/color"
+	"github.com/nathany/bobblehat/sense/screen/color"
 )
 
 // Texture is an RGB565 image of abitrary size.

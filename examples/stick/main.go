@@ -5,9 +5,9 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/gophergala2016/bobblehat/sense/screen"
-	"github.com/gophergala2016/bobblehat/sense/screen/color"
-	"github.com/gophergala2016/bobblehat/sense/stick"
+	"github.com/nathany/bobblehat/sense/screen"
+	"github.com/nathany/bobblehat/sense/screen/color"
+	"github.com/nathany/bobblehat/sense/stick"
 )
 
 func main() {

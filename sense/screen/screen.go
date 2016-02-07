@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/gophergala2016/bobblehat/sense/screen/texture"
+	"github.com/nathany/bobblehat/sense/screen/texture"
 )
 
 // FrameBuffer is an 8x8 texture that can draw to the LED Matrix.
