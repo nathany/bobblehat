@@ -104,12 +104,6 @@ Team:
 * [MacGyvering standoffs to use the joystick](https://twitter.com/carlisia/status/691115626891350016)
 * [Ravi working on SWIG for RTIMULib](https://twitter.com/carlisia/status/691064926509465601/photo/1)
 
-### Future
-
-We bit off too much for a weekend-long hackathon, not having noticed the RTIMULib C++ dependency before starting. We hope this is just the beginning of a community effort to support the Sense HAT and [other HATs](https://shop.pimoroni.com/collections/raspberry-pi/pi-hats-plates) with Go.
-
-Visit [nathany.com](https://nathany.com/) for a post-Gala post-mortem on developing with Go for the Pi.
-
 ### License
 
 The code is licensed under the Simplified BSD License.
