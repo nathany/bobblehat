@@ -146,10 +146,14 @@ Power up the Pi with a Keyboard and TV/Monitor attached:
     - `sudo apt-get update`
     - `sudo apt-get upgrade`
 
-* Install Go 1.6
+* Install Go 1.7
     - [Download Go for Linux ARM](https://golang.org/dl/) (armv6l)
-        eg. `curl -O https://storage.googleapis.com/golang/go1.6beta2.linux-armv6l.tar.gz`
+        eg. `curl -O https://storage.googleapis.com/golang/go1.7.1.linux-armv6l.tar.gz`
     - Extract Go following the [installation instructions](https://golang.org/doc/install).
+    
+        ```
+        sudo tar -C /usr/local -xzf go1.7.1.linux-armv6l.tar.gz
+        ```
     - Use `nano ~/.profile` to edit your startup script to configure your PATH and GOPATH:
     
         ```
