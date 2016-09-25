@@ -1,8 +1,8 @@
-sudo: false
 language: go
 
-go:
-   - 1.5.3
+go: 1.7.1
+
+sudo: false
 
 before_script:
   - go get -u github.com/golang/lint/golint
