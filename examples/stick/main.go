@@ -11,16 +11,18 @@ import (
 	"github.com/nathany/bobblehat/sense/stick"
 )
 
-var path = flag.String("path", "/dev/input/event0", "path to the event device")
-
 func main() {
+	var path string
+
+	flag.StringVar(&path, "path", "/dev/input/event0", "path to the event device")
+
 	// Parse command line flags
 	flag.Parse()
 
 	// Open the input device (and defer closing it)
-	input, err := stick.Open(*path)
+	input, err := stick.Open(path)
 	if err != nil {
-		fmt.Printf("Unable to open input device: %s\nError: %v\n", *path, err)
+		fmt.Printf("Unable to open input device: %s\nError: %v\n", path, err)
 		os.Exit(1)
 	}
 	defer input.Close()
