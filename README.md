@@ -52,17 +52,29 @@ texture.Blit(fb.Texture, 0, 0, tx, 0, 0, 8, 8)
 The Sense HAT has a tiny joystick control.
 
 ```go
-switch stick.ReadEvent() {
-case stick.Up:
-	// go north
-case stick.Down:
-	// go south
-case stick.Left:
-	// go west
-case stick.Right:
-	// go east
-case stick.Enter:
-	// joystick pressed in
+input, err := stick.Open("/dev/input/event0")
+if err != nil {
+	return
+}
+defer input.Close()
+
+for {
+	select {
+	case e := <-input.Events:
+		switch e.Code {
+		case stick.Enter:
+			fmt.Println("⏎ ")
+			return
+		case stick.Up:
+			fmt.Println("↑")
+		case stick.Down:
+			fmt.Println("↓")
+		case stick.Left:
+			fmt.Println("←")
+		case stick.Right:
+			fmt.Println("→")
+		}
+	}
 }
 ```
 
@@ -119,3 +131,5 @@ Illustrations © 2016 Olga Shalakhina.
 * [EMBD](http://embd.kidoman.io/)
 * [sense-hat](https://github.com/RPi-Distro/python-sense-hat) (Python)
 * [RTIMULib](https://github.com/RPi-Distro/RTIMULib) (C++ dependency of sense-hat)
+* [golang-evdev](https://github.com/gvalkov/golang-evdev) (Go bindings for the Linux input subsystem)
+* [evdev](https://github.com/jteeuwen/evdev) (Go implementation of the Linux evdev API)
