@@ -56,7 +56,6 @@ input, err := stick.Open("/dev/input/event0")
 if err != nil {
 	return
 }
-defer input.Close()
 
 for {
 	select {

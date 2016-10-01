@@ -25,7 +25,6 @@ func main() {
 		fmt.Printf("Unable to open input device: %s\nError: %v\n", path, err)
 		os.Exit(1)
 	}
-	defer input.Close()
 
 	// Clear the screen
 	screen.Clear()

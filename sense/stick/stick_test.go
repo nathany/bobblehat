@@ -23,7 +23,6 @@ func TestStickWithEmptyDeviceFile(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer input.Close()
 
 	if got, want := input.Name(), ""; got != want {
 		t.Fatalf("input.Name() = %q, want %q", got, want)

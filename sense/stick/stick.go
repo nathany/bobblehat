@@ -33,17 +33,6 @@ func Open(name string) (*Device, error) {
 	return d, nil
 }
 
-func (d *Device) Close() error {
-	var err error
-
-	if d.f != nil {
-		err = d.f.Close()
-		d.f = nil
-	}
-
-	return err
-}
-
 func (d *Device) Name() string {
 	var str [256]byte
 
