@@ -1,73 +1,109 @@
 package stick
 
 import (
-	"errors"
-	"fmt"
-	"io/ioutil"
 	"os"
-	"path/filepath"
 	"strings"
+	"syscall"
+	"unsafe"
 )
 
-// Joystick events
-var (
-	Right = 0
-	Left  = 1
-	Up    = 2
-	Down  = 3
-	Enter = 4
-)
-
-// the joy stick
-var joyStickDevice string
-
-func init() {
-	var err error
-	joyStickDevice, err = getDevice("Raspberry Pi Sense HAT Joystick")
-	if err != nil {
-		panic(err)
-	}
+// Device is a Sense HAT joystick
+type Device struct {
+	f      *os.File
+	Events chan Event
 }
 
-// ReadEvent from the joystick.
-func ReadEvent() int {
-	file, err := os.Open(joyStickDevice)
+// Open a Sense HAT joystick device and start polling for events
+func Open(name string) (*Device, error) {
+	f, err := os.Open(name)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
-	data := make([]byte, 100)
-	count, err := file.Read(data)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("read %d bytes, %q\n", count, data[:count])
+	d := &Device{f, make(chan Event, 4)}
 
-	return count
+	go d.pollEvents()
+
+	return d, nil
 }
 
-func getDevice(name string) (string, error) {
-	matches, err := filepath.Glob("/sys/class/input/event*")
-	if err != nil {
-		return "", err
-	}
+// Name returns the device name
+func (d *Device) Name() string {
+	var str [256]byte
 
-	for _, dir := range matches {
-		b, err := ioutil.ReadFile(filepath.Join(dir, "device/name"))
+	ioctl(d.f.Fd(), eviocgname(256), uintptr(unsafe.Pointer(&str[0])))
+
+	return strings.TrimRight(string(str[:]), "\x00")
+}
+
+func (d *Device) pollEvents() {
+	defer close(d.Events)
+
+	var e Event
+
+	size := int(unsafe.Sizeof(e))
+	buf := make([]byte, size*2)
+
+	for {
+		n, err := d.f.Read(buf)
 		if err != nil {
-			continue
+			return
 		}
-		fbName := strings.TrimSpace(string(b))
-		if fbName == name {
-			dev := filepath.Join("/dev/input", filepath.Base(dir))
 
-			return dev, nil
+		events := (*(*[1<<27 - 1]Event)(unsafe.Pointer(&buf[0])))[:n/size]
+
+		for i := range events {
+			if e := events[i]; e.Type == 0x01 && e.Value != 0 {
+				d.Events <- e
+			}
 		}
 	}
-	return "", errStickDeviceNotFound
 }
 
-// errors
-var (
-	errStickDeviceNotFound = errors.New("stick device not found")
+// Event represents a input event from the Sense Hat joystick
+type Event struct {
+	Time  syscall.Timeval
+	Type  uint16
+	Code  uint16
+	Value int32
+}
+
+// Key constants
+const (
+	Enter = 28
+	Up    = 103
+	Left  = 105
+	Right = 106
+	Down  = 108
 )
+
+// IOC constants
+const (
+	iocWrite     = 0x1
+	iocRead      = 0x2
+	iocNrbits    = 8
+	iocTypebits  = 8
+	iocSizebits  = 14
+	iocNrshift   = 0
+	iocTypeshift = iocNrshift + iocNrbits
+	iocSizeshift = iocTypeshift + iocTypebits
+	iocDirshift  = iocSizeshift + iocSizebits
+)
+
+func ioc(dir, t, nr, size int) uintptr {
+	return uintptr((dir << iocDirshift) | (t << iocTypeshift) |
+		(nr << iocNrshift) | (size << iocSizeshift))
+}
+
+func ioctl(fd, name, v uintptr) error {
+	_, _, errno := syscall.RawSyscall(syscall.SYS_IOCTL, fd, name, v)
+	if errno == 0 {
+		return nil
+	}
+
+	return errno
+}
+
+func eviocgname(len int) uintptr {
+	return ioc(iocRead, 'E', 0x06, len)
+}
