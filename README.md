@@ -139,7 +139,6 @@ Power up the Pi with a Keyboard and TV/Monitor attached:
 * Use `sudo raspi-config` to configure the Pi.
     - Expand the file system before installing further apps.
     - Set your internationalization options
-    - Advanced options, SSH, enable
     - Reboot when done `sudo reboot`
 
 * Update all the things
@@ -148,17 +147,17 @@ Power up the Pi with a Keyboard and TV/Monitor attached:
 
 * Install Go 1.7
     - [Download Go for Linux ARM](https://golang.org/dl/) (armv6l)
-        eg. `curl -O https://storage.googleapis.com/golang/go1.7.1.linux-armv6l.tar.gz`
+        eg. `curl -O https://storage.googleapis.com/golang/go1.7.3.linux-armv6l.tar.gz`
     - Extract Go following the [installation instructions](https://golang.org/doc/install).
     
         ```
-        sudo tar -C /usr/local -xzf go1.7.1.linux-armv6l.tar.gz
+        sudo tar -C /usr/local -xzf go1.7.3.linux-armv6l.tar.gz
         ```
     - Use `nano ~/.profile` to edit your startup script to configure your PATH and GOPATH:
     
         ```
-        export PATH=$PATH:/usr/local/go/bin
-        export GOPATH=$HOME
+		export GOPATH=$HOME/go
+		export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
         ```
     - Run `source ~/.profile` or reboot to pick up the changes.
     - Run `go version` to check that everything is installed.
@@ -172,7 +171,6 @@ Power up the Pi with a Keyboard and TV/Monitor attached:
     * Jessie has [avahi-daemon](http://www.howtogeek.com/167190/how-and-why-to-assign-the-.local-domain-to-your-raspberry-pi/) for Bonjour networking. 
         - Use `ssh pi@raspberrypi.local`
         - The default password is `raspberry`
-    * Otherwise you can use the IP address `ssh pi@<IP>`. See [SSH instructions](https://www.raspberrypi.org/documentation/remote-access/ssh/).
 
 ### Related Projects
 
