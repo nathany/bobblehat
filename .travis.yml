@@ -1,6 +1,6 @@
 language: go
 
-go: 1.7.1
+go: 1.7.3
 
 sudo: false
 
@@ -8,8 +8,7 @@ before_script:
   - go get -u github.com/golang/lint/golint
 
 script:
-  - go test -race
-  - go test -race ./sense/...
+  - go test -race ./...
 
 after_script:
   - test -z "$(gofmt -s -l -w . | tee /dev/stderr)"

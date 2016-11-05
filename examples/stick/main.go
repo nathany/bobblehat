@@ -50,7 +50,7 @@ func main() {
 
 			switch e.Code {
 			case stick.Enter:
-				fmt.Println("⏎ ")
+				fmt.Println("⏎")
 			case stick.Up:
 				fmt.Println("↑")
 				draw(fb, 0, 0, 8, 4, color.New(255, 255, 0))

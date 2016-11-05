@@ -54,7 +54,7 @@ The Sense HAT has a tiny joystick control.
 ```go
 input, err := stick.Open("/dev/input/event0")
 if err != nil {
-	return
+	log.Fatal(err)
 }
 
 for {
@@ -62,8 +62,7 @@ for {
 	case e := <-input.Events:
 		switch e.Code {
 		case stick.Enter:
-			fmt.Println("⏎ ")
-			return
+			fmt.Println("⏎")
 		case stick.Up:
 			fmt.Println("↑")
 		case stick.Down:
