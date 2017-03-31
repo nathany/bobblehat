@@ -4,6 +4,7 @@ import (
 	"os"
 	"strings"
 	"syscall"
+	"time"
 	"unsafe"
 )
 
@@ -34,6 +35,16 @@ func (d *Device) Name() string {
 	ioctl(d.f.Fd(), eviocgname(256), uintptr(unsafe.Pointer(&str[0])))
 
 	return strings.TrimRight(string(str[:]), "\x00")
+}
+
+// Send sends an Event based on the provided code
+func (d *Device) Send(code uint16) {
+	d.Events <- Event{
+		Time:  syscall.NsecToTimeval(time.Now().UnixNano()),
+		Type:  0x01,
+		Code:  code,
+		Value: 1,
+	}
 }
 
 func (d *Device) pollEvents() {
