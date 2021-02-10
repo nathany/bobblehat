@@ -123,6 +123,55 @@ The original Go gopher © 2009 Renée French. Used under Creative Commons Attri
 
 Illustrations © 2016 Olga Shalakhina.
 
+
+### Go on Pi
+
+How to prepare a MicroSD card for Go development on a Raspberry Pi.
+
+On your Mac/PC:
+
+* Download [Raspian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/)
+* Make a MicroSD card with [Apple Pi Baker for Mac](
+http://www.tweaking4all.com/hardware/raspberry-pi/macosx-apple-pi-baker/) or [follow these instructions](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
+
+Power up the Pi with a Keyboard and TV/Monitor attached:
+
+* Use `sudo raspi-config` to configure the Pi.
+    - Expand the file system before installing further apps.
+    - Set your internationalization options
+    - Reboot when done `sudo reboot`
+
+* Update all the things
+    - `sudo apt-get update`
+    - `sudo apt-get upgrade`
+
+* Install Go 1.7
+    - [Download Go for Linux ARM](https://golang.org/dl/) (armv6l)
+        eg. `curl -O https://storage.googleapis.com/golang/go1.7.3.linux-armv6l.tar.gz`
+    - Extract Go following the [installation instructions](https://golang.org/doc/install).
+    
+        ```
+        sudo tar -C /usr/local -xzf go1.7.3.linux-armv6l.tar.gz
+        ```
+    - Use `nano ~/.profile` to edit your startup script to configure your PATH and GOPATH:
+    
+        ```
+		export GOPATH=$HOME/go
+		export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+        ```
+    - Run `source ~/.profile` or reboot to pick up the changes.
+    - Run `go version` to check that everything is installed.
+
+* Install Git to download source code
+    - `sudo apt-get install git`
+
+* [Configure WiFi](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md) if necessary.
+
+* SSH from your Mac/PC
+    * Jessie has [avahi-daemon](http://www.howtogeek.com/167190/how-and-why-to-assign-the-.local-domain-to-your-raspberry-pi/) for Bonjour networking. 
+        - Use `ssh pi@raspberrypi.local`
+        - The default password is `raspberry`
+
 ### Related Projects
 
 * [Gobot](http://gobot.io/)
